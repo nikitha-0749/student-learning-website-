@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet" href="/style.css">
+<title>Results</title>
+</head>
+
+<body class="details-page">
+
+<div class="nav">
+<a href="/dashboard">Dashboard</a>
+<a href="/courses-page">Back</a>
+</div>
+
+<div class="page">
+<div class="card">
+
+<h1 th:text="${subject}"></h1>
+
+<p th:text="'Videos in ' + ${lang}"></p>
+
+<!-- YouTube search embed -->
+<iframe width="100%" height="420"
+th:src="'https://www.youtube.com/results?search_query=' 
+        + ${subject} + '+tutorial+' + ${lang}"
+frameborder="0">
+</iframe>
+
+
+</div>
+</div>
+
+</body>
+</html>
