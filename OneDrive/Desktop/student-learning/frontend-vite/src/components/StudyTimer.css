@@ -1,0 +1,22 @@
+.timer-container{
+padding:40px;
+border-radius:12px;
+text-align:center;
+background:var(--card-bg);
+color:var(--text-color);
+box-shadow:0 4px 12px rgba(0,0,0,0.1);
+}
+
+.timer-buttons button{
+margin:8px;
+padding:10px 18px;
+border:none;
+border-radius:6px;
+cursor:pointer;
+background:#4f6ef7;
+color:white;
+}
+
+.timer-buttons button:hover{
+opacity:0.9;
+}
