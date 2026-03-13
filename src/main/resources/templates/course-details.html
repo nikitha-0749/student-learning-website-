@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Course Video</title>
+</head>
+<body style="font-family:Arial;text-align:center;margin-top:40px;">
+
+<h2 th:text="${subject} + ' Course'"></h2>
+
+<p>Language: <span th:text="${lang}"></span></p>
+
+<br>
+
+<iframe width="700" height="400"
+        th:src="${videoUrl}"
+        frameborder="0"
+        allowfullscreen>
+</iframe>
+
+<br><br>
+
+<a href="/courses-page">Search Another</a>
+
+</body>
+</html>
