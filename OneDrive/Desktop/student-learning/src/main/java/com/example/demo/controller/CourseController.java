@@ -21,7 +21,7 @@ public class CourseController {
         List<String> blockedTopics = Arrays.asList(
                 "food","cricket","movie","movies","song","songs",
                 "music","dance","comedy","funny","vlog","gaming",
-                "game","pubg","free fire","challenge","prank",
+                "game","free fire","challenge","prank",
                 "celebrity","actor","actress","entertainment"
         );
 
