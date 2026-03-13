@@ -9,7 +9,6 @@ frontend/build/
 target/
 
 # Environment
-application.properties
 .env
 
 # OS
