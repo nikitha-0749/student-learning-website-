@@ -13,10 +13,20 @@ services:
     envVars:
       - key: PORT
         value: 8080
-      - key: DB_URL
+      - key: SPRING_PROFILES_ACTIVE
+        value: render
+      - key: DB_HOST
         fromDatabase:
           name: studentdb
-          property: connectionString
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: studentdb
+          property: port
+      - key: DB_NAME
+        fromDatabase:
+          name: studentdb
+          property: database
       - key: DB_USERNAME
         fromDatabase:
           name: studentdb
@@ -25,5 +35,3 @@ services:
         fromDatabase:
           name: studentdb
           property: password
-      - key: DB_DIALECT
-        value: org.hibernate.dialect.PostgreSQLDialect
