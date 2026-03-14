@@ -1,5 +1,5 @@
 # Use Maven image to build the application
-FROM maven:3.9.11-eclipse-temurin-21 AS build
+FROM maven:3.9.6-eclipse-temurin-17 AS build
 
 # Set working directory
 WORKDIR /app
@@ -15,7 +15,7 @@ COPY src ./src
 RUN mvn clean package -DskipTests
 
 # Use JDK image to run the application
-FROM eclipse-temurin:21-jre
+FROM eclipse-temurin:17-jre
 
 # Set working directory
 WORKDIR /app

@@ -1,0 +1,29 @@
+databases:
+  - name: studentdb
+    databaseName: studentdb
+    user: studentdb_user
+    ipAllowList: [] # empty means all IP addresses are allowed
+
+services:
+  - type: web
+    name: student-learning-backend
+    env: docker
+    plan: free
+    healthCheckPath: /
+    envVars:
+      - key: PORT
+        value: 8080
+      - key: DB_URL
+        fromDatabase:
+          name: studentdb
+          property: connectionString
+      - key: DB_USERNAME
+        fromDatabase:
+          name: studentdb
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: studentdb
+          property: password
+      - key: DB_DIALECT
+        value: org.hibernate.dialect.PostgreSQLDialect
