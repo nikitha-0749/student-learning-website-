@@ -10,7 +10,6 @@ public class SavedVideo {
     private Long id;
 
     private String subject;
-
     private String videoUrl;
 
     public Long getId() {
