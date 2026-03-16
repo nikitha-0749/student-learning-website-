@@ -6,7 +6,7 @@ import com.example.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
+/*@RestController
 @RequestMapping("/api/users")
 @CrossOrigin(origins="*")
 public class UserController {
@@ -35,3 +35,4 @@ public class UserController {
         return "Invalid password";
     }
 }
+    /* */
