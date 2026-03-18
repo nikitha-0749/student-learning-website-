@@ -1,49 +1,53 @@
 import Layout from "../components/Layout";
 import { useState } from "react";
+import axios from "axios";   // ✅ IMPORTANT
 
 function Search() {
 
-  const [query,setQuery] = useState("");
-  const [videos,setVideos] = useState([]);
-  const [selectedVideo,setSelectedVideo] = useState("");
-  const [notes,setNotes] = useState("");
+  const [query, setQuery] = useState("");
+  const [videos, setVideos] = useState([]);
+  const [selectedVideo, setSelectedVideo] = useState("");
+  const [notes, setNotes] = useState("");
 
-  async function searchVideos(){
+  async function searchVideos() {
 
-    if(query.trim()===""){
+    if (query.trim() === "") {
       alert("Enter topic");
       return;
     }
 
-    const res = await axios.get(
-  "https://student-learning-website-13.onrender.com/api/videos?query=" + query
-);
+    try {
+      const res = await axios.get(
+        "https://student-learning-website-13.onrender.com/api/videos?query=" + query
+      );
 
-const data = res.data;
-setVideos(data);
+      const data = res.data;
 
-    // ADDED WARNING CHECK
-    if(data.error){
-      alert(data.error);
-      return;
+      if (data.error) {
+        alert(data.error);
+        return;
+      }
+
+      setVideos(data.videos);
+      setNotes(data.notes);
+
+    } catch (error) {
+      console.error(error);
+      alert("Something went wrong!");
     }
-
-    setVideos(data.videos);
-    setNotes(data.notes);
-
   }
 
-  function playVideo(url){
+  function playVideo(url) {
     setSelectedVideo(url);
   }
 
-  function saveVideo(video){
+  function saveVideo(video) {
 
     let saved = JSON.parse(localStorage.getItem("savedVideos")) || [];
 
     const alreadySaved = saved.find(v => v.url === video.url);
 
-    if(alreadySaved){
+    if (alreadySaved) {
       alert("Video already saved");
       return;
     }
@@ -55,7 +59,7 @@ setVideos(data);
     alert("Video saved!");
   }
 
-  return(
+  return (
 
     <Layout>
 
@@ -63,7 +67,7 @@ setVideos(data);
 
       <input
         value={query}
-        onChange={(e)=>setQuery(e.target.value)}
+        onChange={(e) => setQuery(e.target.value)}
         placeholder="Search subject..."
         style={searchInput}
       />
@@ -74,7 +78,7 @@ setVideos(data);
 
       {selectedVideo && (
 
-        <div style={{marginTop:"30px"}}>
+        <div style={{ marginTop: "30px" }}>
 
           <iframe
             width="720"
@@ -90,21 +94,21 @@ setVideos(data);
 
       <div style={videoGrid}>
 
-        {videos.map((v,index)=>(
+        {videos.map((v, index) => (
 
           <div key={index} style={videoCard}>
 
             <img
               src={v.thumbnail}
               style={thumb}
-              onClick={()=>playVideo(v.url)}
+              onClick={() => playVideo(v.url)}
             />
 
             <p>{v.title}</p>
 
             <button
               style={saveBtn}
-              onClick={()=>saveVideo(v)}
+              onClick={() => saveVideo(v)}
             >
               Save Video
             </button>
@@ -117,11 +121,11 @@ setVideos(data);
 
       {notes && (
 
-        <div style={{marginTop:"40px"}}>
+        <div style={{ marginTop: "40px" }}>
 
           <h2>Study Notes</h2>
 
-          <a href={notes} target="_blank">
+          <a href={notes} target="_blank" rel="noreferrer">
             Open Notes
           </a>
 
@@ -132,47 +136,46 @@ setVideos(data);
     </Layout>
 
   );
-
 }
 
-const searchInput={
-  padding:"10px",
-  width:"300px",
-  marginRight:"10px"
+const searchInput = {
+  padding: "10px",
+  width: "300px",
+  marginRight: "10px"
 };
 
-const searchBtn={
-  padding:"10px 20px",
-  cursor:"pointer"
+const searchBtn = {
+  padding: "10px 20px",
+  cursor: "pointer"
 };
 
-const videoGrid={
-  display:"grid",
-  gridTemplateColumns:"repeat(auto-fill,minmax(250px,1fr))",
-  gap:"20px",
-  marginTop:"30px"
+const videoGrid = {
+  display: "grid",
+  gridTemplateColumns: "repeat(auto-fill,minmax(250px,1fr))",
+  gap: "20px",
+  marginTop: "30px"
 };
 
-const videoCard={
-  background:"#f3f3f3",
-  padding:"10px",
-  borderRadius:"8px"
+const videoCard = {
+  background: "#f3f3f3",
+  padding: "10px",
+  borderRadius: "8px"
 };
 
-const thumb={
-  width:"100%",
-  borderRadius:"6px",
-  cursor:"pointer"
+const thumb = {
+  width: "100%",
+  borderRadius: "6px",
+  cursor: "pointer"
 };
 
-const saveBtn={
-  marginTop:"10px",
-  padding:"6px 10px",
-  background:"#4f6bdc",
-  color:"white",
-  border:"none",
-  borderRadius:"5px",
-  cursor:"pointer"
+const saveBtn = {
+  marginTop: "10px",
+  padding: "6px 10px",
+  background: "#4f6bdc",
+  color: "white",
+  border: "none",
+  borderRadius: "5px",
+  cursor: "pointer"
 };
 
 export default Search;
