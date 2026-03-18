@@ -15,11 +15,12 @@ function Search() {
       return;
     }
 
-    const res = await fetch(
-      `http://localhost:8080/api/search?subject=${query}`
-    );
+    const res = await axios.get(
+  "https://student-learning-website-13.onrender.com/api/videos?query=" + query
+);
 
-    const data = await res.json();
+const data = res.data;
+setVideos(data);
 
     // ADDED WARNING CHECK
     if(data.error){
